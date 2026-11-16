@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Coding Interview</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>💻 AI Interview System</h1>
+
+    <div class="question-card">
+
+        <h2>Coding Interview</h2>
+
+        <p>
+            Question {{ question_number }} of {{ total_questions }}
+        </p>
+
+        <h3>
+            {{ question }}
+        </h3>
+
+        <p>
+            <strong>Language:</strong>
+            {{ language }}
+        </p>
+
+        <form action="/submit-coding-answer" method="POST">
+
+            <textarea
+                name="code"
+                rows="15"
+                placeholder="Write your code here..."
+                required
+            ></textarea>
+
+            <br><br>
+
+            <button type="submit">
+                Submit Code
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

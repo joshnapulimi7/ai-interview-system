@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Interview Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>📈 Interview Dashboard</h1>
+
+    <p>
+        Track your interview practice and performance.
+    </p>
+
+
+    <!-- Dashboard Cards -->
+
+    <div class="dashboard-container">
+
+
+        <!-- Total Interviews -->
+
+        <div class="dashboard-card">
+
+            <h2>🎯 Total Interviews</h2>
+
+            <div class="dashboard-number">
+                {{ total_interviews }}
+            </div>
+
+            <p>
+                Interviews Completed
+            </p>
+
+        </div>
+
+
+        <!-- Average Score -->
+
+        <div class="dashboard-card">
+
+            <h2>📊 Average Score</h2>
+
+            <div class="dashboard-number">
+                {{ average_score|round(0) }}%
+            </div>
+
+            <p>
+                Overall Average
+            </p>
+
+        </div>
+
+
+        <!-- Best Score -->
+
+        <div class="dashboard-card">
+
+            <h2>🏆 Best Score</h2>
+
+            <div class="dashboard-number">
+                {{ best_score|round(0) }}%
+            </div>
+
+            <p>
+                Highest Performance
+            </p>
+
+        </div>
+
+
+    </div>
+        <!-- Improvement Recommendation -->
+
+    <div class="result-card">
+
+        <h2>💡 AI Improvement Recommendation</h2>
+
+        {% if average_score >= 80 %}
+
+            <p>
+                🎉 Excellent performance!
+                Keep practicing advanced interview questions
+                to maintain your strong performance.
+            </p>
+
+        {% elif average_score >= 60 %}
+
+            <p>
+                👍 Good performance!
+                Focus on improving your explanations and
+                covering all important concepts.
+            </p>
+
+        {% elif average_score >= 40 %}
+
+            <p>
+                📚 You are making progress!
+                Practice more technical questions and
+                improve the completeness of your answers.
+            </p>
+
+        {% else %}
+
+            <p>
+                🚀 Your current score shows that you need
+                more practice with technical fundamentals.
+                Focus on understanding concepts and explaining
+                them clearly with examples.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    <br>
+        <!-- Interview Performance -->
+
+    <div class="result-card">
+
+        <h2>📊 Interview Performance</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Interview</th>
+                    <th>Type</th>
+                    <th>Score</th>
+                    <th>Performance</th>
+                    <th>Date</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for result in performance_data %}
+
+                    <tr>
+
+                        <td>
+                            #{{ result[0] }}
+                        </td>
+
+                        <td>
+                            {{ result[1] }}
+                        </td>
+
+                        <td>
+                            {{ result[2]|round(0) }}%
+                        </td>
+
+                        <td>
+                            {{ result[3] }}
+                        </td>
+
+                        <td>
+                            {{ result[4] }}
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- Navigation -->
+
+    <a href="/technical">
+        <button>🎤 Practice Interview</button>
+    </a>
+
+
+    <a href="/history">
+        <button>📊 View History</button>
+    </a>
+
+
+    <a href="/">
+        <button>🏠 Back to Home</button>
+    </a>
+
+
+</body>
+
+</html>

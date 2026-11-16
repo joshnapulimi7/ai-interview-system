@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Technical Interview</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>🤖 AI Interview System</h1>
+
+    <div class="question-card">
+
+        <h2>Technical Interview</h2>
+
+        <p>Question {{ question_number }} of 3</p>
+
+        <h3>{{ question }}</h3>
+
+        <form action="/submit-answer" method="POST">
+
+            <textarea
+                name="answer"
+                rows="8"
+                placeholder="Type your answer here..."
+                required
+            ></textarea>
+
+            <br><br>
+
+            <button type="submit">
+                Submit Answer
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

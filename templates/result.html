@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Interview Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>🏆 Interview Completed</h1>
+
+
+    <!-- Overall Score Card -->
+
+    <div class="result-card">
+
+        <h2>Overall Score</h2>
+
+        <div class="score">
+            {{ total_score }}/{{ maximum_score }}
+        </div>
+
+        <div class="percentage">
+            {{ percentage|round(0) }}%
+        </div>
+
+        <h2>Performance: {{ performance }}</h2>
+
+    </div>
+
+
+    <!-- Question-wise Performance -->
+
+    <h2>📊 Question-wise Performance</h2>
+
+
+    {% for i in range(total_questions) %}
+
+        <div class="result-card">
+
+            <h2>Question {{ i + 1 }}</h2>
+
+            <p>
+                <strong>Question:</strong>
+                {{ [
+                    "What is Python?",
+                    "What are the advantages of Python?",
+                    "What is the difference between a list and a tuple?"
+                ][i] }}
+            </p>
+
+
+            <p>
+                <strong>Your Answer:</strong>
+            </p>
+
+            <p>
+                {{ answers[i] }}
+            </p>
+
+
+            <p>
+                <strong>Score:</strong>
+                {{ scores[i] }}/10
+            </p>
+
+
+            <p>
+                <strong>Feedback:</strong>
+                {{ feedbacks[i] }}
+            </p>
+
+
+            <!-- Strengths -->
+
+            <div class="strengths">
+
+                <h3>💪 Strengths</h3>
+
+                {% if strengths[i] %}
+
+                    <ul>
+
+                        {% for strength in strengths[i] %}
+
+                            <li>{{ strength }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                {% else %}
+
+                    <p>No major strengths detected.</p>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Improvements -->
+
+            <div class="improvements">
+
+                <h3>⚠️ Areas to Improve</h3>
+
+                {% if weaknesses[i] %}
+
+                    <ul>
+
+                        {% for weakness in weaknesses[i] %}
+
+                            <li>{{ weakness }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                {% else %}
+
+                    <p>No major areas to improve.</p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+
+    <br>
+
+
+    <a href="/">
+        <button>🏠 Back to Home</button>
+    </a>
+
+
+</body>
+
+</html>

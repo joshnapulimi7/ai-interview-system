@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Coding Interview Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>🏆 Coding Interview Completed</h1>
+
+
+    <div class="result-card">
+
+        <h2>Overall Score</h2>
+
+        <div class="score">
+            {{ total_score }}/{{ maximum_score }}
+        </div>
+
+        <div class="percentage">
+            {{ percentage|round(0) }}%
+        </div>
+
+
+        {% if percentage >= 80 %}
+
+            <h2>Performance: Excellent 🎉</h2>
+
+        {% elif percentage >= 60 %}
+
+            <h2>Performance: Good 👍</h2>
+
+        {% elif percentage >= 40 %}
+
+            <h2>Performance: Average 📚</h2>
+
+        {% else %}
+
+            <h2>Performance: Needs Improvement 🚀</h2>
+
+        {% endif %}
+
+    </div>
+
+
+    <h2>📊 Question-wise Performance</h2>
+
+
+    {% for i in range(answers|length) %}
+
+        <div class="result-card">
+
+            <h2>
+                Question {{ i + 1 }}
+            </h2>
+
+
+            <p>
+                <strong>Your Code:</strong>
+            </p>
+
+            <pre>{{ answers[i] }}</pre>
+
+
+            <p>
+                <strong>Score:</strong>
+                {{ scores[i] }}/10
+            </p>
+
+
+            <p>
+                <strong>Feedback:</strong>
+                {{ feedbacks[i] }}
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+
+    <br>
+
+
+    <a href="/coding">
+
+        <button>
+            🔄 Practice Coding Interview Again
+        </button>
+
+    </a>
+
+
+    <a href="/dashboard">
+
+        <button>
+            📈 View Dashboard
+        </button>
+
+    </a>
+
+
+    <a href="/">
+
+        <button>
+            🏠 Back to Home
+        </button>
+
+    </a>
+
+</body>
+
+</html>

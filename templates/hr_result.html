@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>HR Interview Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>🏆 HR Interview Completed</h1>
+
+
+    <!-- ==========================================
+         Overall Result
+         ========================================== -->
+
+    <div class="result-card">
+
+        <h2>Overall Score</h2>
+
+        <div class="score">
+            {{ total_score }}/{{ maximum_score }}
+        </div>
+
+        <div class="percentage">
+            {{ percentage|round(0) }}%
+        </div>
+
+
+        {% if percentage >= 80 %}
+
+            <h2>Performance: Excellent 🎉</h2>
+
+        {% elif percentage >= 60 %}
+
+            <h2>Performance: Good 👍</h2>
+
+        {% elif percentage >= 40 %}
+
+            <h2>Performance: Average 📚</h2>
+
+        {% else %}
+
+            <h2>Performance: Needs Improvement 🚀</h2>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ==========================================
+         Question-wise Performance
+         ========================================== -->
+
+    <h2>📊 Question-wise Performance</h2>
+
+
+    {% for i in range(answers|length) %}
+
+        <div class="result-card">
+
+            <h2>
+                Question {{ i + 1 }}
+            </h2>
+
+
+            <p>
+                <strong>Your Answer:</strong>
+            </p>
+
+            <p>
+                {{ answers[i] }}
+            </p>
+
+
+            <p>
+                <strong>Score:</strong>
+
+                {{ scores[i] }}/10
+
+            </p>
+
+
+            <p>
+                <strong>Feedback:</strong>
+
+                {{ feedbacks[i] }}
+
+            </p>
+
+
+            <!-- ======================================
+                 Strengths
+                 ====================================== -->
+
+            {% if strengths[i] %}
+
+                <div class="strengths">
+
+                    <h3>💪 Strengths</h3>
+
+                    <ul>
+
+                        {% for strength in strengths[i] %}
+
+                            <li>
+                                {{ strength }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ======================================
+                 Areas to Improve
+                 ====================================== -->
+
+            {% if weaknesses[i] %}
+
+                <div class="improvements">
+
+                    <h3>⚠️ Areas to Improve</h3>
+
+                    <ul>
+
+                        {% for weakness in weaknesses[i] %}
+
+                            <li>
+                                {{ weakness }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    {% endfor %}
+
+
+    <!-- ==========================================
+         Navigation Buttons
+         ========================================== -->
+
+    <br>
+
+    <a href="/hr">
+
+        <button>
+            🔄 Practice HR Interview Again
+        </button>
+
+    </a>
+
+
+    <a href="/dashboard">
+
+        <button>
+            📈 View Dashboard
+        </button>
+
+    </a>
+
+
+    <a href="/">
+
+        <button>
+            🏠 Back to Home
+        </button>
+
+    </a>
+
+
+</body>
+
+</html>

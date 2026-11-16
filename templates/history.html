@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Interview History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>📊 Interview History</h1>
+
+    <p>View your previous interview attempts and performance.</p>
+
+
+    {% if results %}
+
+        <div class="result-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Interview Type</th>
+                        <th>Score</th>
+                        <th>Percentage</th>
+                        <th>Performance</th>
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for result in results %}
+
+                        <tr>
+
+                            <td>{{ result[0] }}</td>
+
+                            <td>{{ result[1] }}</td>
+
+                            <td>
+                                {{ result[2] }}/{{ result[3] }}
+                            </td>
+
+                            <td>
+                                {{ result[4]|round(0) }}%
+                            </td>
+
+                            <td>
+                                {{ result[5] }}
+                            </td>
+
+                            <td>
+                                {{ result[6] }}
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="result-card">
+
+            <h2>No Interview History</h2>
+
+            <p>
+                You haven't completed any interviews yet.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <br>
+
+    <a href="/">
+        <button>🏠 Back to Home</button>
+    </a>
+
+
+</body>
+
+</html>
